@@ -1,0 +1,25 @@
+body {
+  background: white;
+  color: #333333;
+  max-width: 1000px ;
+  margin: auto;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+header + div{
+  margin-bottom: 100px;
+}
+
+div + footer {
+  margin-bottom: 100px;
+}
+
+article + article {
+  padding: 50px;
+}
+
+p + p {
+  line-height: 1rem;
+  margin-bottom: 50px;
+}
