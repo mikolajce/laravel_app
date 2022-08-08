@@ -1,33 +1,46 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <title>Praktyka</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="/app.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Hello World!</h1>
-      <br>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
-      <p>
-        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-    </header>
-    <div id="login" class="">
-      <h2><a href="/login">Zaloguj</a></h2>
-    </div>
-    <div class="debug">
-      <a href="/post_template">LINK DO TEMPLATKI</a>
-      <br>
-      <a href="/debug">DEBUG !</a>
-    </div>
-    <footer>
-      <h2><a href="/userposts/post1">Link 1</a></h2>
-      <h2><a href="/userposts/post2">Link 2</a></h2>
-    </footer>
-  </body>
-</html>
+@extends ('temp')
+
+@section ('body')
+
+<div>
+  <h1>Hello World!</h1>
+  <article>
+    <p>
+      Projekt strony internetowej zaprojektowany w oparciu o framework Laravel w ramach praktyki zawodowej w sierpniu 2022. Dokumentację projektu z historią commitów można znaleźć na <a href="https://www.github.com/mikolajce/praktyka_2022">moim GitHubie</a>.
+    </p>
+    <p>
+      Rzeczy <strong>działające</strong>:<br>
+      + szablonowanie z dziedziczeniem<br>
+      + routing do podstron z deklaratywnym kodem<br>
+      + CSS na poziomie gimnazjum<br>
+    </p>
+    <p>
+      Rzeczy <strong>do implementacji</strong>:<br>
+      - <strong>logowanie oraz rejestracja</strong><br>
+      - cała masa innych bzdetów<br>
+    </p>
+  </article>
+</div>
+<div id="login" class="">
+  <h2><a href="/login">Zaloguj</a></h2>
+</div>
+<div>
+  <?php foreach ($content as $element) : ?>
+    <br>
+    <article>
+      <h2>
+        <a href="/userposts/<?= $element->slug; ?>">
+          <?= $element->title; ?>
+        </a>
+      </h2>
+      <p><?= $element->excerpt; ?></p>
+    </article>
+  <?php endforeach; ?>
+</div>
+<div class="debug">
+  <h2>Strefa deweloperska/testowa/debug/nie ruszać!</h2><br>
+  <p><a href="/post_template">LINK DO TEMPLATKI</a></p>
+  <p><a href="/debug">DEBUG !</a></p>
+</div>
+
+@endsection ('body')

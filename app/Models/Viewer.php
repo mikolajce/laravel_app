@@ -4,23 +4,49 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 class Viewer{
+  public $file_template;
+  public $title;
+  public $slug;
+  public $date;
+  public $excerpt;
+  public $body;
 
-  public static function getHeadDir(){
-    return file_get_contents(resource_path("templates/head.blade.php"));
+  public function __construct($file_template,$title,$slug,$date,$excerpt,$body){
+      $this->file_template = $file_template;
+      $this->title = $title;
+      $this->slug = $slug;
+      $this->date = $date;
+      $this->excerpt = $excerpt;
+      $this->body = $body;
   }
 
   public static function getAllFiles(){
-    return File::files(resource_path("userposts/"));
+    return cache()->remember('allUserposts', now()->addMinutes(1), function(){
+      return collect(
+          File::files(resource_path("userposts/")))
+            ->map(fn($file) => YamlFrontMatter::parseFile($file))
+            ->map(fn($document) => new Viewer(
+                $document->file_template,
+                $document->title,
+                $document->slug,
+                $document->date,
+                $document->excerpt,
+                $document->body(),
+            ))
+            ->sortByDesc('date');
+    });
   }
 
   public static function getFile($slug, $path){
-    if(!file_exists($path)){
-      throw new ModelNotFoundException;
-    }
 
-    return cache()->remember("userposts.{$slug}",now()->addSeconds(5),fn()=>file_get_contents($path));
+    $it = static::getAllFiles()->firstWhere('slug', $slug);
+    if (!$it)
+      throw new ModelNotFoundException();
+    else
+      return $it;
   }
 
 }

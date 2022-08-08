@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <?= $head ?? 'no head set' ?>
-  </head>
-  <body>
-    <? if(!isset($content)) foreach ($posts as $content) : ?>
-      <article>
-        <?= $content ?>
-      </article>
-    <? endforeach; ?>
-    <article>
-      <a href="/">Home</a>
-    </article>
-  </body>
-</html>
+@extends ('temp')
+
+@section ('body')
+
+<h1><?= $content->title; ?></h1>
+<p><?= $content->excerpt ?></p>
+<?= $content->body; ?>
+<p><a href="/">Home</a></p>
+
+@endsection

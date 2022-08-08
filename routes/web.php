@@ -2,46 +2,32 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Viewer;
+use Illuminate\Support\Facades\File;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+// default route
 Route::get('/', function () {
-    return view('hello');
-});
-
-Route::get('debug', function () {
-    return view('post_template',[
+    return view('hello',[
       'content' => Viewer::getAllFiles()
     ]);
 });
 
-Route::get('login', function () {
-    return view('login',[
-      'head' => Viewer::getHeadDir()
+// debug route for testing: DO NOT USE POSTPROD
+Route::get('debug', function () {
+    return view('welcome',[
+      'content' => 'foo'
     ]);
 });
 
-Route::get('post_template', function () {
-    return view('post_template',[
-      'head' => Viewer::getHeadDir()
-    ]);
+Route::get('login', function () {
+    return view('login');
 });
 
 Route::get('/userposts/{post}', function ($slug) {
     $path = resource_path("userposts/{$slug}.html");
 
     return view('post_template',[
-      'content' => Viewer::getFile($slug, $path),
-      'head' => Viewer::getHeadDir()
+      'content' => Viewer::getFile($slug, $path)
     ]);
 
 })->where('post', '\b(post)[0-9]+\b');
