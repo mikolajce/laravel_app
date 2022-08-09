@@ -15,7 +15,7 @@
 
     <footer>
       Mikołaj Cieśliczka &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="https://ww.github.com/mikolajce/praktyka_2022">GitHub</a>
+      <a href="https://www.github.com/mikolajce/praktyka_2022">GitHub</a>
     </footer>
   </body>
 </html>
