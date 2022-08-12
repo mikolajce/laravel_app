@@ -29,11 +29,11 @@
     <br>
     <article>
       <h2>
-        <a href="/userposts/<?= $element->slug; ?>">
-          <?= $element->title; ?>
+        <a href="/userposts/{{ $element->id }}">
+          {{ $element->title; }}
         </a>
       </h2>
-      <p><?= $element->excerpt; ?></p>
+      {{ $element->excerpt }}
     </article>
   <?php endforeach; ?>
 </div>
