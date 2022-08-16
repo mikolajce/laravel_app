@@ -1,6 +1,5 @@
-@extends ('temp')
-
-@section ('body')
+<x-template>
+<x-slot name="body">
 
 <form class="" action="/hello" method="post">
   <p>Wprowadź login:</p>
@@ -15,4 +14,5 @@
   <p><a href="/">Zaloguj</a></p>
 </form>
 
-@endsection
+</x-slot>
+</x-template>

@@ -11,7 +11,7 @@
       <h1 class="header"><a href="/">Praktyka 2022</a></h1>
     </header>
 
-    @yield ('body')
+    {{ $body }}
 
     <footer>
       Mikołaj Cieśliczka &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

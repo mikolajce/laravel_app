@@ -18,6 +18,22 @@ class Post extends Model
     // ^ EQUAL TO v
 
     protected $guarded = [
-      'id'
+      'id',
     ];
+
+    protected $with = [
+      'category',
+      'user'
+    ];
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    // public function getRouteKeyName(){
+    //   return 'slug';
+    // }
 }

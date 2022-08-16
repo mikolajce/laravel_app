@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
-use Spatie\YamlFrontMatter\YamlFrontMatter;
+use App\Models\Category;
+use App\Models\User;
 
 // default route
 Route::get('/', function () {
     return view('hello',[
-      'content' => Post::all()
+      'content' => Post::latest('created_at')->get()
     ]);
 });
 
@@ -18,6 +19,7 @@ Route::get('debug', function () {
     ]);
 });
 
+// debug: database connection test: DO NOT USE POSTPROD
 Route::get('/db-test', function () {
     if(DB::connection()->getDatabaseName())
       echo "success" . DB::connection()->getDatabaseName();
@@ -28,13 +30,21 @@ Route::get('login', function () {
     return view('login');
 });
 
-Route::get('userposts/{id}', function (Post $id) {
+Route::get('posts/{post:slug}', function (Post $post){
     return view('post_template',[
-      'content' => $id
+      'content' => $post
     ]);
-// Route::get('/userposts/{post}', function (Post $post) {
-//     return view('post_template',[
-//       'content' => $post
-//     ]);
+});
 
-})->where('post', '\b(post)[0-9]+\b');
+Route::get('categories/{category:slug}', function (Category $category){
+    return view('hello',[
+      'content' => $category->posts
+    ]);
+});
+
+Route::get('authors/{user:username}', function (User $user){
+    ddd($user);
+    return view('hello',[
+      'content' => $user->posts
+    ]);
+});
