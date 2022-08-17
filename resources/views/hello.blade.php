@@ -1,62 +1,49 @@
-<x-template>
+<x-main>
 <x-slot name="body">
 
-<div>
-  <h1>Hello World!</h1>
-  <article>
-    <h2>
-      Projekt strony internetowej zaprojektowany w oparciu o framework Laravel w ramach praktyki zawodowej w sierpniu 2022. Dokumentację projektu z historią commitów można znaleźć na <a href="https://www.github.com/mikolajce/praktyka_2022">moim GitHubie</a>.
-    </h2>
-    <p>
-      Rzeczy <strong>działające</strong>:<br>
-      + szablonowanie Blade z dziedziczeniem<br>
-      + CSS na poziomie gimnazjum (do poprawy w przyszłości)<br>
-      + routing do podstron z deklaratywnym kodem<br>
-      + czerpanie informacji z bazy danych, bez możliwości modyfikacji z poziomu strony<br>
-      + zautomatyzowana produkcja funkcjonalnych postów za pomocą fabryk<br>
-    </p>
-    <p>
-      Rzeczy <strong>do implementacji</strong>:<br>
-      - <strong>logowanie oraz rejestracja</strong><br>
-      - nieskończenie wiele rzeczy<br>
-    </p>
+  <section id="intro">
+    <header>
+      <img src="/resources/images/logo.jpg" alt="">
+      <h2>Hello World!</h2>
+      <p>Projekt realizowany w ramach praktyki zawodowej</p>
+       Rzeczy <strong>działające</strong>:<br>
+       + szablonowanie podstron w oparciu o silnik Blade<br>
+       + rozwinięty CSS na podstawie darmowego szablonu <a href="https://www.html5up.net">html5up</a><br>
+       + routing do podstron z deklaratywnym kodem<br>
+       + czerpanie informacji z bazy danych, bez możliwości modyfikacji z poziomu strony<br>
+       + zautomatyzowana produkcja funkcjonalnych postów za pomocą fabryk<br>
+       <br>
+       Rzeczy <strong>do implementacji</strong>:<br>
+       - <strong>logowanie oraz rejestracja</strong><br>
+       - nieskończenie wiele rzeczy<br>
+    </header>
+  </section>
+
+@if ($content->count())
+  <x-featured :content="$content[0]"/>
+  <section>
+    <div class="mini-posts">
+      <?php $i=0; foreach ($content->skip(1) as $a) : ?>
+        <x-post :content="$a"/>
+        <?php if($i++>2) break; endforeach; ?>
+    </div>
+  </section>
+@endif
+
+{{-- playground, remove postprod --}}
+@if (!env('APP_DEBUG'))
+<section class="blurb">
+  <h2>Strefa dewelopera</h2><br>
+  <article class="">
+
   </article>
-</div>
-<div id="login" class="">
-  <h2><a href="/login">Zaloguj</a></h2>
-</div>
-<div>
-  <?php foreach ($content as $a) : ?>
-    <br>
-    <article>
-      <h2>
-        <a href="/posts/{{ $a->slug }}">
-          {{ $a->title; }}
-        </a>
-      </h2>
-      <p>
-        Autorstwa
-        <a href="/authors/{{ $a->user->username }}">
-          {{ $a->user->name }}
-        </a>
-        w kategorii
-        <a href="/categories/{{ $a->category->slug }}">
-          {{ $a->category->name }}
-        </a>
-      </p>
-      <p>
-        {{ $a->excerpt }}
-      </p>
-    </article>
-  <?php endforeach; ?>
-</div>
-@if (env('APP_DEBUG'))
-  <div class="debug">
-    <h2>Strefa dewelopera</h2><br>
-    <p><a href="/post_template">LINK DO TEMPLATKI</a></p>
-    <p><a href="/debug">DEBUG !</a></p>
-  </div>
+  <p>Tego miało nie być widać...</p>
+  <ul class="actions">
+    <li><a href="/post_template" class="button">LINK DO TEMPLATKI</a></li>
+    <li><a href="/debug" class="button">DEBUG !</a></li>
+  </ul>
+</section>
 @endif
 
 </x-slot>
-</x-template>
+</x-main>

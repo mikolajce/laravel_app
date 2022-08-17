@@ -1,4 +1,4 @@
-<x-template>
+<x-main>
 <x-slot name="body">
 
 <h1>{{ $content->title }}</h1>
@@ -17,4 +17,4 @@
 </a></p>
 
 </x-slot>
-</x-template>
+</x-main>

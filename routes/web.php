@@ -31,19 +31,18 @@ Route::get('login', function () {
 });
 
 Route::get('posts/{post:slug}', function (Post $post){
-    return view('post_template',[
+    return view('single',[
       'content' => $post
     ]);
 });
 
 Route::get('categories/{category:slug}', function (Category $category){
-    return view('hello',[
+    return view('category',[
       'content' => $category->posts
     ]);
 });
 
 Route::get('authors/{user:username}', function (User $user){
-    ddd($user);
     return view('hello',[
       'content' => $user->posts
     ]);
