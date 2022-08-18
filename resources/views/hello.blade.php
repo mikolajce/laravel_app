@@ -1,33 +1,44 @@
 <x-main>
 <x-slot name="body">
 
-  <section id="intro">
-    <header>
-      <img src="/resources/images/logo.jpg" alt="">
-      <h2>Hello World!</h2>
-      <p>Projekt realizowany w ramach praktyki zawodowej</p>
-       Rzeczy <strong>działające</strong>:<br>
-       + szablonowanie podstron w oparciu o silnik Blade<br>
-       + rozwinięty CSS na podstawie darmowego szablonu <a href="https://www.html5up.net">html5up</a><br>
-       + routing do podstron z deklaratywnym kodem<br>
-       + czerpanie informacji z bazy danych, bez możliwości modyfikacji z poziomu strony<br>
-       + zautomatyzowana produkcja funkcjonalnych postów za pomocą fabryk<br>
-       <br>
-       Rzeczy <strong>do implementacji</strong>:<br>
-       - <strong>logowanie oraz rejestracja</strong><br>
-       - nieskończenie wiele rzeczy<br>
-    </header>
-  </section>
+<x-intro/>
 
-@if ($content->count())
-  <x-featured :content="$content[0]"/>
-  <section>
-    <div class="mini-posts">
-      <?php $i=0; foreach ($content->skip(1) as $a) : ?>
-        <x-post :content="$a"/>
-        <?php if($i++>2) break; endforeach; ?>
-    </div>
-  </section>
+@if (!(request('search') || request('category')))
+
+  @if ($content->count())
+    <x-featured :content="$content[0]"/>
+    <section>
+      <div class="mini-posts">
+        <?php $i=0; foreach ($content->skip(1) as $a) : ?>
+          <x-post :content="$a"/>
+          <?php if($i++>2) break; ?>
+        <?php endforeach; ?>
+      </div>
+    </section>
+  @else
+    <h1>Nie ma tu jeszcze nic ciekawego... pracuję nad tym.</h1>
+    <p>Sprawdź później, czy coś się nie pojawiło!</p>
+  @endif
+
+@else
+  @if ($content->count())
+    @if (request('category'))
+      <h1>Wpisy w kategorii "{{ request('category') }}":</h1>
+    @else
+      <h1>Wyniki dla frazy "{{ request('search') }}":</h1>
+    @endif
+    <section>
+      <div class="mini-posts">
+        <?php foreach ($content as $a) : ?>
+          <x-post :content="$a"/>
+        <?php endforeach; ?>
+      </div>
+    </section>
+  @else
+    <h1>Nie znaleziono {{ request('search') }}...</h1>
+    <p>Na pewno dobrze wpisałeś?</p>
+  @endif
+
 @endif
 
 {{-- playground, remove postprod --}}
@@ -42,6 +53,13 @@
     <li><a href="/post_template" class="button">LINK DO TEMPLATKI</a></li>
     <li><a href="/debug" class="button">DEBUG !</a></li>
   </ul>
+</section>
+
+<section class="blurb" x-data="{ show: false }">
+  <button @click="show = ! show">TEST</button>
+  <div x-show="show">
+    <h2>Przeglądaj kategorie</h2>
+  </div>
 </section>
 @endif
 

@@ -4,7 +4,7 @@
 <article class="post">
   <header>
     <div class="title">
-      <h2><a href="#">{{ $content->title }}</a></h2>
+      <h2>{{ $content->title }}</a></h2>
       <p>{{ $content->excerpt }}</p>
     </div>
     <div class="meta">
@@ -18,7 +18,7 @@
   <p>{{ $content->body }}</p>
   <footer>
     <ul class="stats">
-      <li><a href="/categories/{{ $content->category->slug }}">{{ $content->category->name }}</a></li>
+      <li><a href="/?category={{ $content->category->slug }}">{{ $content->category->name }}</a></li>
       <li><a href="#" class="icon solid fa-heart">?</a></li>
       <li><a href="#" class="icon solid fa-comment">?</a></li>
     </ul>

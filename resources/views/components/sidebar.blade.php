@@ -6,7 +6,7 @@
 -->
 <html lang="en" dir="ltr">
   <x-meta-head/>
-  <body class="single is-preload">
+  <body>
     <div id="wrapper">
       <header id="header">
         <h1><a href="/">Praktyka 2022</a></h1>
@@ -45,11 +45,14 @@
       </section>
 
       <div id='main'>
-        {{ $body }}
+        <x-sidebar-intro/>
       </div>
 
-      <section id="footer">
-        <x-meta-footer/>
+      <section id="sidebar">
+        {{ $login }}
+        <section id="footer">
+          <x-meta-footer/>
+        </section>
       </section>
 
     </div>

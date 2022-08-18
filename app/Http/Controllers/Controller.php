@@ -10,4 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    // needs fix
+    public function DBconn(){
+      if(DB::connection()->getDatabaseName())
+        echo "success" . DB::connection()->getDatabaseName();
+      else ddd(DB::connection()->getDatabaseName());
+    }
 }

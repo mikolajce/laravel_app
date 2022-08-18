@@ -1,7 +1,7 @@
-<x-main>
-<x-slot name="body">
+<x-sidebar>
+<x-slot name="login">
 
-<section id="sidebar">
+<section id="intro">
   <form class="" action="/hello" method="post">
     <h2>Wprowadź login:</h2>
     <br>
@@ -14,8 +14,8 @@
     <input type="submit" name="" value="Zaloguj">
     <a href="register" class="button">Zarejestruj się!</a>
   </form>
+  <br>
 </section>
-<br>
 
 </x-slot>
-</x-main>
+</x-sidebar>
