@@ -10,7 +10,8 @@ class PostController extends Controller
 {
     public function index(){
       return view('hello',[
-        'content' => Post::latest()->filter(request(['search','category']))->get(),
+        'content' => Post::latest()->filter(request(['search','category','user']))
+          ->paginate(10)->withQueryString(),
         'categories' => Category::all()
       ]);
     }

@@ -20,7 +20,10 @@ class PostFactory extends Factory
 
         return [
             'user_id' => User::factory(),
-            'category_id' => Category::factory(),
+            'category_id' =>
+            2,
+            // Category::where('name','like','Tests')->pluck('id'),
+            // returns 1x1 array, expects string
             'title' => $title,
             'slug' => $slug,
             'excerpt' => $this->faker->sentence,

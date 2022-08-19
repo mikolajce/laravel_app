@@ -6,12 +6,13 @@
 @if (!(request('search') || request('category')))
 
   @if ($content->count())
-    <x-featured :content="$content[0]"/>
+    @if (!request('page'))
+      <x-featured :content="$content->random()"/>
+    @endif
     <section>
       <div class="mini-posts">
-        <?php $i=0; foreach ($content->skip(1) as $a) : ?>
+        <?php foreach ($content as $a) : ?>
           <x-post :content="$a"/>
-          <?php if($i++>2) break; ?>
         <?php endforeach; ?>
       </div>
     </section>
@@ -35,11 +36,15 @@
       </div>
     </section>
   @else
-    <h1>Nie znaleziono {{ request('search') }}...</h1>
+    <h1>Brak wyników dla frazy "{{ request('search') }}"...</h1>
     <p>Na pewno dobrze wpisałeś?</p>
   @endif
 
 @endif
+
+<div class="pagination">
+  {{ $content->links() }}
+</div>
 
 {{-- playground, remove postprod --}}
 @if (!env('APP_DEBUG'))

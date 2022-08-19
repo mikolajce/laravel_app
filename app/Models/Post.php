@@ -19,6 +19,7 @@ class Post extends Model
 
     protected $guarded = [
       'id',
+      'title'
     ];
 
     protected $with = [
@@ -31,7 +32,14 @@ class Post extends Model
         $query
           ->where('title', 'like', '%' . $search . '%')
           ->orWhere('body', 'like', '%' . $search . '%')
-          // ->orWhere('user', 'like', '%' . $search . '%')
+          ->orWhereHas('user', fn ($query) =>
+            $query
+              ->where('name', 'like', '%' . $search . '%')
+              ->orWhere('username', 'like', '%' . $search . '%')
+          )
+          ->orWhereHas('category', fn ($query) =>
+            $query->where('name', 'like', '%' . $search . '%')
+          )
       );
 
       $query->when($filters['category'] ?? false, fn ($query, $category) =>

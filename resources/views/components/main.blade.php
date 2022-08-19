@@ -12,6 +12,7 @@
         <h1><a href="/">Praktyka 2022</a></h1>
         <nav class="links">
           <ul x-data="{ open: false }">
+            <li><p><strong>Witaj, {placeholder}</strong></p></li>
             <li><a href="#">???</a></li>
             <li><a href="#" @click="open = !open">Kategorie</a></li>
             {{-- variable not passed --}}
@@ -34,7 +35,7 @@
               </section>
             </li>
             <li class="login">
-              <a class="fa-bars" href="/login">Logowanie</a>
+              <a class="fa-person" href="/login">Logowanie</a>
             </li>
           </ul>
         </nav>

@@ -3,6 +3,7 @@
 <article class="post">
   <header>
     <div class="title">
+      <h1>Polecany artykuł</h1>
       <h2><a href="/posts/{{ $content->slug }}">
         {{ $content->title }}
       </a></h2>

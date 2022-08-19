@@ -7,7 +7,7 @@
     <h2>Hej, moja własna strona!</h2>
     <p>Nazywam się <strong>Mikołaj</strong> Cieśliczka.</p>
     Jestem studentem informatyki na specjalności <strong>projektant aplikacji webowych</strong>. <br>
-    Projekt był realizowany w sierpniu 2022 r. w ramach <strong>praktyki zawodowej</strong>. <br>
+    Projekt był realizowany w sierpniu 2022 r. w ramach <strong>praktyki zawodowej</strong> i będzie kontynuowany w ramach studiów.<br>
     Nie ma tutaj za dużo treści, więc sprawdź inne podstrony i zobacz, co przygotowałem :) <br>
     <p>&nbsp;</p>
     <p>Bieżąca funkcjonalność:</p>
